@@ -38,6 +38,8 @@
 		info.style.cssText = 'left: 20px; position: absolute; top: 0px; ';
 		info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
 			'<p>Collada files imported to Blender and exported as Three.js JSON</p>' +
+			'<p>Includes Walt and Revit JSON files for testing</p>' +
+			'<input type=checkbox id=chkZoom /> display bounding sphere & shadow area' +
 			'<div id=menu ></div><br>' +
 			'<div id=msg></div>' +
 		'';
@@ -66,6 +68,10 @@
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
 		camera.position.set( 1, 1, 1 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
+
+		if ( location.hash ) {
+			loadFile( location.hash.substr( 1) );
+		}
 
 	}
 
@@ -110,7 +116,7 @@
 			mesh.receiveShadow = true;
 			scene.add( mesh );
 
-			zoomExtents();
+			zoomExtents( chkZoom.checked );
 
 			msg.innerHTML = fileName.split('/').pop();
 
@@ -120,22 +126,63 @@
 
 	}
 
-	function zoomExtents() {
+	function zoomExtents( testing ) {
+
+		scale = 1; // scene.children[3].scale.x;
+		var meshes = 0;
+		var c, r;
+		var geo = new THREE.Geometry();
 		scene.traverse( function ( child ) {
-			if ( child instanceof THREE.Mesh ) {
-				child.geometry.computeBoundingSphere();
-				var c = child.geometry.boundingSphere.center;
-				controls.target.set( c.x, c.y, c.z );
-				var r = 1.25 * child.geometry.boundingSphere.radius;
-				camera.position.set( r, r, r );
-				updateShadows( c, r );
+			if ( child instanceof THREE.Mesh && child.name !== 'zoomSphere' ) {
+				geo.merge( child.geometry );
+// while traversing, miht as well do this...
+				child.castShadow = true;
+				child.receiveShadow = true;
+				meshes++;
 			}
 		} );
+
+		geo.computeBoundingSphere();
+		c = geo.boundingSphere.center.multiplyScalar( scale );
+		controls.target.set( c.x, c.y, c.z);
+		r = 1.25 * geo.boundingSphere.radius * scale;
+		camera.position.set( (c.x + r), ( c.y + r ), ( c.z + r ) );
+
+
+		if ( zoomSphere ) { scene.remove( zoomSphere ); }
+
+		if ( testing ) {
+			geometry = new THREE.SphereGeometry( r );
+			material = new THREE.MeshNormalMaterial( { opacity: 0.5, transparent: true, wireframe: true } );
+			zoomSphere = new THREE.Mesh( geometry, material );
+			zoomSphere.position.set( c.x, c.y, c.z);
+			zoomSphere.name = 'zoomSphere';
+			scene.add( zoomSphere );
+
+console.log( 'meshes', meshes, 'rad', r, 'scl', scale );
+console.log( 'center', c );
+console.log( 'target', controls.target );
+console.log( 'camera', camera.position );
+console.log( 'geo', geo);
+
+		}
+
+		if ( camera.far < r || camera.far >  3 * r ) {
+			camera.far = 5 * r;
+			camera.updateProjectionMatrix();
+console.log( 'camera.far', camera.far );
+
+		}
+
+		updateShadows( c, r, testing );
+
+		animate();
+
 	}
 
-	function updateShadows( cen, rad ) {
+	function updateShadows( cen, rad, testing ) {
 
-		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+		var lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
 
 		lightDirectional.castShadow = true;
 		lightDirectional.shadowMapWidth = 2048;
@@ -156,9 +203,10 @@
 		lightDirectional.updateMatrix();
 		lightDirectional.updateMatrixWorld();  
 
-		lightDirectional.shadowCameraVisible = true;
+		if ( testing ) { lightDirectional.shadowCameraVisible = true; }
 		scene.add( lightDirectional );
 	}
+
 
 	function animate() {
 		requestAnimationFrame( animate );

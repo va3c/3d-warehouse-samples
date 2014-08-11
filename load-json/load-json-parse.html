@@ -31,7 +31,6 @@
 
 	init();
 
-
 	function init() {
 		document.body.style.cssText = 'font: 400 12pt monospace; margin: 0; overflow: hidden;' ;
 
@@ -61,13 +60,21 @@
 		} else {
 			renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff } );
 		}
+
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMapEnabled = true;
+		renderer.shadowMapSoft = true;
 		document.body.appendChild( renderer.domElement );
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100000 );
-		camera.position.set( 15000, 15000, 15000 );
-		camera.position.set( 15, 15, 15 );
+
+		scene = new THREE.Scene();
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
+		camera.position.set( 1, 1, 1 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
+
+		if ( location.hash ) {
+			loadFile( location.hash.substr( 1) );
+		}
 
 	}
 
@@ -124,7 +131,7 @@ console.log( 'found geometry' );
 			var mesh = new THREE.Mesh( geometry, material );
 //			mesh.verticesNeedUpdate = true;
 			scene.add( mesh );
-			zoomExtents( true );
+			zoomExtents( chkZoom.checked );
 
 		} else if ( data.metadata.type.toLowerCase() === 'object' ) {
 
@@ -135,13 +142,13 @@ console.log( 'found geometry' );
 console.log( 'found scene' );
 
 				scene.add( contents );
-				zoomExtents( true );
+				zoomExtents( chkZoom.checked );
 
 			} else {
 console.log( 'found object', contents );
 
 				scene.add( contents );
-				zoomExtents( true );
+				zoomExtents( chkZoom.checked );
 
 			}
 		} else if ( data.metadata.type.toLowerCase() === 'scene' ) {
@@ -168,6 +175,7 @@ console.log( 'found a whoopsie');
 		scene.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh && child.name !== 'zoomSphere' ) {
 				geo.merge( child.geometry );
+// while traversing, miht as well do this...
 				child.castShadow = true;
 				child.receiveShadow = true;
 				meshes++;
