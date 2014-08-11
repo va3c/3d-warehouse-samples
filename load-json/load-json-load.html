@@ -16,9 +16,9 @@
 		['../../json/revit/Project2.rvt.js','Revit file not loading'], // not
 		['../../json/revit/rac_basic_sample_project.rvt.js','Revit file not loading'],
 		['../robie-house/untitled/robie-house.js','1909 - loads slowly but worth the wait'],
-		['../schroder-house/untitled/schroder-house.js','1909'],
+		['../schroder-house/untitled/schroder-house.js','1909 - good'],
 		['../villa-savoye/images/villa-savoye.js','1929 - result nor pretty'],
-		['../barcelona-pavilion/untitled/barcelona-pavilion.js','1930'],
+		['../barcelona-pavilion/untitled/barcelona-pavilion.js','1930 - good'],
 		['../glass-house/untitled/glass-house.js','1949 - results not pretty']
 	]
 
@@ -65,7 +65,7 @@
 
 		scene = new THREE.Scene();
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 5000 );
 		camera.position.set( 1, 1, 1 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
 
