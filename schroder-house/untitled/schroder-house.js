@@ -3444,9 +3444,6 @@
 
 	"skinIndices" : [],
 
-	"skinWeights" : [],
-
-  "animations" : []
-
+	"skinWeights" : []
 
 }

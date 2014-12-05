@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>Browse 3D Warehouse JSON Models</title>
+<meta charset=utf-8 />
+<meta name=viewport content=width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0 />
+</head>
+<body>
+<script src=http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js ></script>
+<script src=../viewer/va3c-hacker/r2-4dev/va3c-hacker-r2-4dev.js ></script>
+<script>
+
+	var files = [
+
+	];
+
+	var file = files[ Math.floor( files.length * Math.random() ) ];
+
+	var template = './templates/template-lights-shadows.html';
+
+	var hackerPrefix = '../viewer/va3c-hacker/r2-4dev/';
+
+	VH.initHackette();
+
+	VH.displayMarkdown( './browse-3dwarehouse-json-files-hackette.md', menuLeft );
+
+//	location.hash =  './stl/' + file[0] + '#random#sx=' + file[1] + '#sy=' + file[1] + '#sz=' + file[1] + '#displayInfo';
+
+</script>
+</body>
+</html>

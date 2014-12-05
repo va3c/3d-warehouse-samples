@@ -1,6 +1,20 @@
 3D Warehouse Samples
 ====================
 
+## Sources of the 3D models
+
+Many thanks to the following:
+
+* Barcelona Pavilion - <https://3dwarehouse.sketchup.com/model.html?id=a7767394dd9c5f1ab6de6574321e6f11>
+* Glass House - <https://3dwarehouse.sketchup.com/model.html?id=fcac425aab052f98a5ee547d707fbcab>
+* Robie House - <https://3dwarehouse.sketchup.com/model.html?id=8eec8f6dd51ae4e52a5318f0d124d361)
+* Schroder House - <https://3dwarehouse.sketchup.com/model.html?id=b14447590f4b5e613232617f0a5b3a63>
+* Villa Savoye - <https://3dwarehouse.sketchup.com/model.html?id=e2bb07de7a82c468f9c1628d84b1ea48>
+
+
+_The following is mostly no longer relevant to the files in this folder. Eventually there will be a triage here_
+
+ 
 Collada and Three.js JSON versions
 
 [3D Warehouse Samples ~ Load Collada Load]( http://va3c.github.io/viewer/cookbook/load-collada-load/latest/index.html )
