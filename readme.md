@@ -1,4 +1,4 @@
-[View 3D Warehouse Files]( ./index.html )
+[View 3D Warehouse Models]( ./index.html )
 ===
 [vA3C Hackette web page view]( http://va3c.github.io/3d-warehouse-samples/ "View files with vA3C Hacker" )  
 [GitHub source code view]( https://github.com/va3c/3d-warehouse-samples "View files with GitHub")  
@@ -22,9 +22,9 @@ See also the notes after the links.
 [3D Warehouse]( https://3dwarehouse.sketchup.com/model.html?id=b14447590f4b5e613232617f0a5b3a63 ) [GitHub]( https://github.com/va3c/3d-warehouse-samples/tree/gh-pages/schroder-house )
 
 
-[![villa-savoye]( ./villa-savoye/villa-savoye-480x320.png )]( #./villa-savoye/images/villa-savoye.js#sx=5#sy=5#sz=5#add=true )  
-[[0]]( #./villa-savoye/images/villa-savoye.js#sx=5#sy=5#sz=5 )
-[Villa Savoye]( #./villa-savoye/images/villa-savoye.js#sx=5#sy=5#sz=5#add=true ) 1929  
+[![villa-savoye]( ./villa-savoye/villa-savoye-480x320.png )]( #./villa-savoye/untitled/villa-savoye.js#sx=5#sy=5#sz=5#add=true )  
+[[0]]( #./villa-savoye/untitled/villa-savoye.js#sx=5#sy=5#sz=5 )
+[Villa Savoye]( #./villa-savoye/untitled/villa-savoye.js#sx=5#sy=5#sz=5#add=true ) 1929  
 [3D Warehouse]( https://3dwarehouse.sketchup.com/model.html?id=e2bb07de7a82c468f9c1628d84b1ea48 ) [GitHub]( https://github.com/va3c/3d-warehouse-samples/tree/gh-pages/villa-savoye )
 
 
