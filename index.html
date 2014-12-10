@@ -15,7 +15,11 @@
 <script>
 
 	var files = [
-
+		['robie-house',100],
+		['schroder-house',5],
+		['barcelona-pavilion',5],
+		['villa-savoye',5],
+		['glass-house',5]
 	];
 
 	var file = files[ Math.floor( files.length * Math.random() ) ];
@@ -32,7 +36,7 @@
 
 	VH.displayMarkdown( './readme.md', menuLeft );
 
-//	location.hash =  '../../cookbook/samples/' + file[0] + '#random#sx=' + file[1] + '#sy=' + file[1] + '#sz=' + file[1] + '#displayInfo';
+	location.hash =  './' + file[0] + '/untitled/' + file[0] + '.js#sx=' + file[1] + '#sy=' + file[1] + '#sz=' + file[1] + '#displayInfo';
 
 </script>
 </body>
